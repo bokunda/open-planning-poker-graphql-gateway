@@ -13,10 +13,10 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Packages.props", "."]
-COPY ["src/Gateway/OpenPlanningPoker.Fusion.Gateway/OpenPlanningPoker.Fusion.Gateway.csproj", "src/Gateway/OpenPlanningPoker.Fusion.Gateway/"]
-RUN dotnet restore "./src/Gateway/OpenPlanningPoker.Fusion.Gateway/OpenPlanningPoker.Fusion.Gateway.csproj"
+COPY ["OpenPlanningPoker.Fusion.Gateway.csproj", "."]
+RUN dotnet restore "./OpenPlanningPoker.Fusion.Gateway.csproj"
 COPY . .
-WORKDIR "/src/src/Gateway/OpenPlanningPoker.Fusion.Gateway"
+WORKDIR "/src/."
 RUN dotnet build "./OpenPlanningPoker.Fusion.Gateway.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
